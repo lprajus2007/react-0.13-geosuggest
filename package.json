@@ -1,0 +1,30 @@
+{
+  "name": "react-0.13-geosuggest",
+  "version": "0.0.3",
+  "description": "React Geosuggest for 0.13",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/lprajus2007/react-0.13-geosuggest/"
+  },
+  "peerDependencies": {
+    "react": "^0.13.1"
+  },
+  "devDependencies": {
+    "browserify": "^11.0.0"
+  },
+  "keywords": [
+    "react",
+    "google",
+    "geosuggest",
+    "0.13"
+  ],
+  "author": {
+    "name": "Satya Sampathirao",
+    "email": "satyalak@buffalo.edu"
+  },
+  "license": "MIT"
+}
