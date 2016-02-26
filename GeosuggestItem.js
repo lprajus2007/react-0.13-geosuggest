@@ -1,12 +1,18 @@
 'use strict';
 
+var _temporalUndefined = {};
+
+var GeosuggestItem = _temporalUndefined;
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _temporalAssertDefined(val, name, undef) { if (val === undef) { throw new ReferenceError(name + ' is not defined - temporal dead zone'); } return true; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var GeosuggestItem = _react2['default'].createClass({
+GeosuggestItem = _react2['default'].createClass({
   displayName: 'GeosuggestItem',
 
   /**
@@ -37,12 +43,17 @@ var GeosuggestItem = _react2['default'].createClass({
    * @return {Function} The React element to render
    */
   render: function render() {
-    var clas = this.getSuggestClasses();
+    var clas = _temporalUndefined;
+    clas = this.getSuggestClasses();
+
+    _temporalAssertDefined(_temporalAssertDefined(clas, 'clas', _temporalUndefined) && clas, 'clas', _temporalUndefined);
+
     clas += typeof this.props.suggest.label !== 'string' ? 'invalidate' : '';
+
     return (// eslint-disable-line no-extra-parens
       _react2['default'].createElement(
         'li',
-        { className: clas,
+        { className: _temporalAssertDefined(clas, 'clas', _temporalUndefined) && clas,
           onClick: this.onClick },
         this.props.suggest.label
       )
@@ -54,14 +65,21 @@ var GeosuggestItem = _react2['default'].createClass({
    * @return {String} The classes
    */
   getSuggestClasses: function getSuggestClasses() {
-    var className = this.props.suggest.className;
-    var classes = 'geosuggest-item';
+    var className = _temporalUndefined;
+    var classes = _temporalUndefined;
+
+    className = this.props.suggest.className;
+    classes = 'geosuggest-item';
+
+    _temporalAssertDefined(_temporalAssertDefined(classes, 'classes', _temporalUndefined) && classes, 'classes', _temporalUndefined);
 
     classes += this.props.isActive ? ' geosuggest-item--active' : '';
-    classes += className ? ' ' + className : '';
 
-    return classes;
+    _temporalAssertDefined(_temporalAssertDefined(classes, 'classes', _temporalUndefined) && classes, 'classes', _temporalUndefined);
+
+    classes += _temporalAssertDefined(_temporalAssertDefined(className, 'className', _temporalUndefined) && className, 'className', _temporalUndefined) && _temporalAssertDefined(className, 'className', _temporalUndefined) && className ? ' ' + (_temporalAssertDefined(_temporalAssertDefined(className, 'className', _temporalUndefined) && className, 'className', _temporalUndefined) && _temporalAssertDefined(className, 'className', _temporalUndefined) && className) : '';
+
+    return _temporalAssertDefined(classes, 'classes', _temporalUndefined) && classes;
   }
 });
-
-module.exports = GeosuggestItem;
+module.exports = _temporalAssertDefined(GeosuggestItem, 'GeosuggestItem', _temporalUndefined) && GeosuggestItem;
