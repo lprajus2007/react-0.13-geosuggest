@@ -153,13 +153,13 @@ Geosuggest = _react2['default'].createClass({
     let customSuggests = [];
     if (this.props.customLocations && this.state.userInput.length > 2) {
       for(var key in this.props.customLocations){
-        if (key.indexOf(this.state.userInput) > -1) {
+        if (key.toLowerCase().indexOf(this.state.userInput.toLowerCase()) > -1) {
           customSuggests.push({key: key, data: this.props.customLocations[key]});
         }
       }
     }
     
-    return [];
+    return customSuggests;
   },
 
   /**
@@ -189,8 +189,6 @@ Geosuggest = _react2['default'].createClass({
     });
 
     customSuggests.forEach(function (suggest) {
-      console.log('found custom suggestion');
-      console.log(suggest);
       suggests.push({
         label: suggest.key,
         type: 'custom',
@@ -301,8 +299,6 @@ Geosuggest = _react2['default'].createClass({
    * @param {GeosuggestItem} suggest The selected suggest item
    */
   selectSuggest: function selectSuggest(suggest) {
-    console.log('select suggestion');
-    console.log(suggest);
     if (!suggest) {
       suggest = {
         label: this.state.userInput
