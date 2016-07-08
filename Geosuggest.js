@@ -38,6 +38,7 @@ Geosuggest = _react2['default'].createClass({
       bounds: null,
       country: null,
       types: null,
+      customLocations: null,
       googleMaps: google && google.maps,
       onSuggestSelect: function onSuggestSelect() {},
       onFocus: function onFocus() {},
@@ -121,6 +122,7 @@ Geosuggest = _react2['default'].createClass({
       this.updateSuggests();
       return;
     }
+    let customSuggests = this.searchCustomSuggests();
 
     var options = {
       input: this.state.userInput,
@@ -143,19 +145,36 @@ Geosuggest = _react2['default'].createClass({
     }
 
     this.state.autocompleteService.getPlacePredictions(options, (function (suggestsGoogle) {
-      this.updateSuggests(suggestsGoogle);
+      this.updateSuggests(suggestsGoogle, customSuggests);
     }).bind(this));
+  },
+
+  searchCustomSuggests: function searchCustomSuggests() {
+    let customSuggests = [];
+    if (this.props.customLocations && this.state.userInput.length > 2) {
+      for(var key in this.props.customLocations){
+        if (key.toLowerCase().indexOf(this.state.userInput.toLowerCase()) > -1) {
+          customSuggests.push({key: key, data: this.props.customLocations[key]});
+        }
+      }
+    }
+    
+    return customSuggests;
   },
 
   /**
    * Update the suggests
    * @param  {Object} suggestsGoogle The new google suggests
    */
-  updateSuggests: function updateSuggests(suggestsGoogle) {
+  updateSuggests: function updateSuggests(suggestsGoogle, customSuggests) {
     var _this = this;
 
     if (!suggestsGoogle) {
       suggestsGoogle = [];
+    }
+
+    if (!customSuggests) {
+      customSuggests = [];
     }
 
     var suggests = [],
@@ -169,10 +188,19 @@ Geosuggest = _react2['default'].createClass({
       }
     });
 
+    customSuggests.forEach(function (suggest) {
+      suggests.push({
+        label: suggest.key,
+        type: 'custom',
+        location: suggest.data
+      });
+    });
+
     suggestsGoogle.forEach(function (suggest) {
       if (!skipSuggest(suggest)) {
         suggests.push({
           label: _this.props.getSuggestLabel(suggest),
+          type: 'google',
           placeId: suggest.place_id
         });
       }
@@ -287,7 +315,12 @@ Geosuggest = _react2['default'].createClass({
       return;
     }
 
-    this.geocodeSuggest(suggest);
+    if (suggest.type === 'google') {
+      this.geocodeSuggest(suggest);
+    } else {
+      this.props.onSuggestSelect(suggest);
+    }
+    
   },
 
   /**
@@ -303,6 +336,7 @@ Geosuggest = _react2['default'].createClass({
       var gmaps = results[0],
           location = gmaps.geometry.location;
 
+      suggest.type = 'google';
       suggest.gmaps = gmaps;
       suggest.location = {
         lat: location.lat(),
