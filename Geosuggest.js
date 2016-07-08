@@ -122,7 +122,7 @@ Geosuggest = _react2['default'].createClass({
       this.updateSuggests();
       return;
     }
-    let customSuggests = this.searchCustomSuggests();
+    var customSuggests = this.searchCustomSuggests();
 
     var options = {
       input: this.state.userInput,
@@ -150,7 +150,7 @@ Geosuggest = _react2['default'].createClass({
   },
 
   searchCustomSuggests: function searchCustomSuggests() {
-    let customSuggests = [];
+    var customSuggests = [];
     if (this.props.customLocations && this.state.userInput.length > 2) {
       for(var key in this.props.customLocations){
         if (key.toLowerCase().indexOf(this.state.userInput.toLowerCase()) > -1) {
