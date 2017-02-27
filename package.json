@@ -1,6 +1,6 @@
 {
   "name": "react-0.13-geosuggest",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "React Geosuggest for 0.13",
   "main": "index.js",
   "scripts": {
