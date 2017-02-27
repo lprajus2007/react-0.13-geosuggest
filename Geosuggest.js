@@ -300,8 +300,16 @@ Geosuggest = _react2['default'].createClass({
    * @param {GeosuggestItem} suggest The selected suggest item
    */
   selectSuggest: function selectSuggest(suggest) {
-    if (!suggest && this.state.suggests.length) {
+    var isSuggestValid = false;
+    if (suggest) {
+      this.state.suggests.map((function(sugg) {
+        if (sugg.label.indexOf(suggest.label) > -1) isSuggestValid = true;
+      }).bind(this));
+    }
+
+    if ((!suggest && this.state.suggests.length) || !isSuggestValid) {
       suggest = this.state.suggests[0];
+      this.setState({ activeSuggest: null });
     }
     else if (!suggest) {
       suggest = {
