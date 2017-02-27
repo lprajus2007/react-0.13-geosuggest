@@ -192,7 +192,8 @@ Geosuggest = _react2['default'].createClass({
       suggests.push({
         label: suggest.key,
         type: 'custom',
-        location: suggest.data
+        location: suggest.data,
+        placeId: suggest.key
       });
     });
 
@@ -299,7 +300,10 @@ Geosuggest = _react2['default'].createClass({
    * @param {GeosuggestItem} suggest The selected suggest item
    */
   selectSuggest: function selectSuggest(suggest) {
-    if (!suggest) {
+    if (!suggest && this.state.suggests.length) {
+      suggest = this.state.suggests[0];
+    }
+    else if (!suggest) {
       suggest = {
         label: this.state.userInput
       };
