@@ -307,7 +307,7 @@ Geosuggest = _react2['default'].createClass({
       }).bind(this));
     }
 
-    if ((!suggest && this.state.suggests.length) || !isSuggestValid) {
+    if ((!suggest && this.state.suggests.length) || (!isSuggestValid && this.state.suggests.length)) {
       suggest = this.state.suggests[0];
       this.setState({ activeSuggest: null });
     }
