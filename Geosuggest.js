@@ -27,6 +27,7 @@ Geosuggest = _react2['default'].createClass({
    * @return {Object} The state
    */
   getDefaultProps: function getDefaultProps() {
+    var canIUseGoogle = (typeof google !== 'undefined' && typeof google.maps !== 'undefined');
     return {
       fixtures: [],
       initialValue: '',
@@ -39,7 +40,7 @@ Geosuggest = _react2['default'].createClass({
       country: null,
       types: null,
       customLocations: null,
-      googleMaps: google && google.maps,
+      googleMaps: canIUseGoogle ? (google && google.maps) : null,
       onSuggestSelect: function onSuggestSelect() {},
       onFocus: function onFocus() {},
       onBlur: function onBlur() {},
@@ -61,8 +62,8 @@ Geosuggest = _react2['default'].createClass({
       userInput: this.props.initialValue,
       activeSuggest: null,
       suggests: [],
-      geocoder: new this.props.googleMaps.Geocoder(),
-      autocompleteService: new this.props.googleMaps.places.AutocompleteService()
+      geocoder: this.props.googleMaps ? new this.props.googleMaps.Geocoder() : null,
+      autocompleteService: this.props.googleMaps ? new this.props.googleMaps.places.AutocompleteService() : null
     };
   },
 
