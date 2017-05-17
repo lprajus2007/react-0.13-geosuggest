@@ -1,6 +1,6 @@
 {
   "name": "react-0.13-geosuggest",
-  "version": "1.2.0",
+  "version": "1.3.1",
   "description": "React Geosuggest for 0.13",
   "main": "index.js",
   "scripts": {
@@ -27,5 +27,8 @@
     "name": "Satya Sampathirao",
     "email": "satyalak@buffalo.edu"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "fuzzysearch": "^1.0.3"
+  }
 }

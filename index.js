@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./Geosuggest');
+module.exports = require('./Geosuggestdist');
