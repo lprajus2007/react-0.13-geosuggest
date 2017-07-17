@@ -13,8 +13,6 @@ function _temporalAssertDefined(val, name, undef) { if (val === undef) { throw n
 
 var _react = require('react');
 
-var fuzzysearch = require('fuzzysearch');
-
 var _react2 = _interopRequireDefault(_react);
 
 var _GeosuggestItem = require('./GeosuggestItem');
@@ -155,14 +153,11 @@ Geosuggest = _react2['default'].createClass({
   searchCustomSuggests: function searchCustomSuggests() {
     var customSuggests = [];
     if (this.props.customLocations && this.state.userInput.length > 3) {
-      if (fuzzysearch(this.state.userInput, this.props.customLocations)) {
-        customSuggests.push({key: key, data: this.props.customLocations[key]});
+      for(var key in this.props.customLocations){
+        if (key.toLowerCase().indexOf(this.state.userInput.toLowerCase()) > -1) {
+          customSuggests.push({key: key, data: this.props.customLocations[key]});
+        }
       }
-      // for(var key in this.props.customLocations){
-      //   if (key.toLowerCase().indexOf(this.state.userInput.toLowerCase()) > -1) {
-      //     customSuggests.push({key: key, data: this.props.customLocations[key]});
-      //   }
-      // }
     }
     
     return customSuggests;

@@ -27,8 +27,5 @@
     "name": "Satya Sampathirao",
     "email": "satyalak@buffalo.edu"
   },
-  "license": "MIT",
-  "dependencies": {
-    "fuzzysearch": "^1.0.3"
-  }
+  "license": "MIT"
 }
